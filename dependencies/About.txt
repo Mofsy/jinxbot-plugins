@@ -1,0 +1,3 @@
+This folder contains dependencies from the main JinxBot root.  The externals listing
+is configured to only download from the read-only version of the repository; therefore, 
+changes made to the projects will not be committed to the main project repository. 
