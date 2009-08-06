@@ -19,23 +19,10 @@ namespace JinxBot.Plugins.Data.XmlDatabase
             if (string.IsNullOrEmpty(input))
                 throw new ArgumentNullException("input");
 
-            UserInput = input;
-            Regex translator = new Regex(@"[][{}()*+?.\\^$|]");
-            const string replacement = "\\$0";
-
-            string escaped = translator.Replace(input, replacement);
-
-            Regex starTranslator = new Regex(@"(?<!\\)\\\*");
-            const string starReplacement = ".*";
-
-            string temp = starTranslator.Replace(escaped, starReplacement);
-
-            Regex questionTranslator = new Regex(@"(?<!\\)\\\?");
-            const string questionReplacement = ".{1}";
-            temp = questionTranslator.Replace(temp, questionReplacement);
-            m_matchRegex = "\\A" + temp + "\\z";
-            Matcher = new Regex(m_matchRegex, RegexOptions.IgnoreCase);
-
+            InputString = input;
+            
+            Matcher = MatchUtility.CreateMetaMatch(input, out m_matchRegex);
+            
             m_roles = new List<string>();
         }
 
@@ -43,7 +30,7 @@ namespace JinxBot.Plugins.Data.XmlDatabase
         {
             Debug.Assert(element != null);
 
-            UserInput = element.Attribute("InputString").Value;
+            InputString = element.Attribute("InputString").Value;
             m_matchRegex = element.Attribute("Match").Value;
             Matcher = new Regex(m_matchRegex, RegexOptions.IgnoreCase);
 
@@ -54,7 +41,7 @@ namespace JinxBot.Plugins.Data.XmlDatabase
         internal XElement Serialize()
         {
             return new XElement("Meta",
-                new XAttribute("InputString", UserInput), new XAttribute("Match", m_matchRegex),
+                new XAttribute("InputString", InputString), new XAttribute("Match", m_matchRegex),
                 new XElement("Roles",
                     from r in m_roles
                     select new XElement("Add", new XAttribute("Role", r))
@@ -91,11 +78,6 @@ namespace JinxBot.Plugins.Data.XmlDatabase
         }
 
         #region IJinxBotMeta Members
-
-        public string MatchPattern
-        {
-            get { return UserInput; }
-        }
 
         public IEnumerable<string> Roles
         {

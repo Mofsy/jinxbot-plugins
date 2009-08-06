@@ -45,6 +45,10 @@
     <Content Include="AuthoringTests.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\dependencies\JinxBot.Plugins\JinxBot.Plugins.csproj">
+      <Project>{9C13A2E5-2A06-4BD9-BED0-F93E9BB03D31}</Project>
+      <Name>JinxBot.Plugins</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JinxBot.Plugins.Data.XmlDatabase\JinxBot.Plugins.Data.XmlDatabase.csproj">
       <Project>{779E1D36-28D6-4CF2-81B1-FC55838BD037}</Project>
       <Name>JinxBot.Plugins.Data.XmlDatabase</Name>
