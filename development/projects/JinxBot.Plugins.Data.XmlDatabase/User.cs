@@ -29,7 +29,7 @@ namespace JinxBot.Plugins.Data.XmlDatabase
             m_owner = databaseProvider;
         }
 
-        internal User(XElement element)
+        internal User(XElement element, XmlDatabase databaseProvider)
         {
             Debug.Assert(element != null);
 
@@ -46,6 +46,8 @@ namespace JinxBot.Plugins.Data.XmlDatabase
 
             m_roles = (from r in element.Elements("Roles").Elements("Add").Attributes("Role")
                        select r.Value).ToList();
+
+            m_owner = databaseProvider;
         }
 
         internal XElement Serialize()

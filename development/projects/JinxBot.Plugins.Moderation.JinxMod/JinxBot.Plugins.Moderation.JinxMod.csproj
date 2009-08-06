@@ -45,7 +45,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JinxMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\dependencies\BNSharp\BNSharp.csproj">
+      <Project>{2D02D43C-BC3B-41D2-9226-4E215939107F}</Project>
+      <Name>BNSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\dependencies\JinxBot.Controls\JinxBot.Controls.csproj">
+      <Project>{48E3907C-69BB-48C1-817D-6E5B4BE51EF6}</Project>
+      <Name>JinxBot.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\dependencies\JinxBot.Plugins\JinxBot.Plugins.csproj">
+      <Project>{9C13A2E5-2A06-4BD9-BED0-F93E9BB03D31}</Project>
+      <Name>JinxBot.Plugins</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
