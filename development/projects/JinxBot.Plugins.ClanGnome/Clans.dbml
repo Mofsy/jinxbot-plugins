@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="Clans" Class="ClansDataContext" Provider="SQLCompact" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="ChannelView" Member="ChannelViews">
+    <Type Name="ChannelView">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ClanID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="When" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UserCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserList" Type="System.String" DbType="NVarChar(2500) NOT NULL" CanBeNull="false" />
+      <Column Name="AllowedView" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+        <Association Name="Clan_ChannelView" Member="Clan" ThisKey="ClanID" OtherKey="ID" Type="Clan" IsForeignKey="true"/>
+    </Type>
+  </Table>
+  <Table Name="Clans" Member="Clans">
+    <Type Name="Clan">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsDbGenerated="true" AutoSync="OnInsert" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Tag" Type="System.String" DbType="NVarChar(8) NOT NULL" CanBeNull="false" />
+      <Column Name="GatewayID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DiscoverySource" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
+        <Association Name="Gateway_Clan" Member="Gateway" ThisKey="GatewayID" OtherKey="ID" Type="Gateway" IsForeignKey="true"/>
+        <Association Name="Clan_ChannelView" Member="ChannelViews" ThisKey="ID" OtherKey="ClanID" Type="ChannelView"/>
+    </Type>
+  </Table>
+  <Table Name="Gateways">
+    <Type Name="Gateway">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+        <Association Name="Gateway_Clan" Member="Clans" ThisKey="ID" OtherKey="GatewayID" Type="Clan"/>
+    </Type>
+  </Table>
+</Database>
